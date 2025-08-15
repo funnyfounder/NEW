@@ -24,22 +24,6 @@ startBtn.addEventListener('click', async () => {
 
     const SPIKE_THRESHOLD = 35;
 
-    function updateBackground(level) {
-  const body = document.body;
-
-  let gradient;
-  if (level < 20) {
-    gradient = "linear-gradient(to bottom right, #CAFFBF, #BDB2FF)";
-  } else if (level < 50) {
-    gradient = "linear-gradient(to bottom right, #FFD6A5, #FFC6FF)";
-  } else {
-    gradient = "linear-gradient(to bottom right, #FFADAD, #9BF6FF)";
-  }
-
-  body.style.background = gradient;
-  body.style.transition = "background 1s ease-in-out";
-}
-
 
     function update() {
       analyser.getByteTimeDomainData(dataArray);
@@ -74,6 +58,21 @@ startBtn.addEventListener('click', async () => {
         spikeCountText.textContent = spikeCount;
         localStorage.setItem("spikeCount", spikeCount);
       }
+    function updateBackground(level) {
+  const body = document.body;
+
+  let gradient;
+  if (level < 20) {
+    gradient = "linear-gradient(to bottom right, #CAFFBF, #BDB2FF)";
+  } else if (level < 50) {
+    gradient = "linear-gradient(to bottom right, #FFD6A5, #FFC6FF)";
+  } else {
+    gradient = "linear-gradient(to bottom right, #FFADAD, #9BF6FF)";
+  }
+
+  body.style.background = gradient;
+  body.style.transition = "background 1s ease-in-out";
+}
 
       requestAnimationFrame(update);
     }
