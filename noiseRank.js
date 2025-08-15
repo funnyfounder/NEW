@@ -1,4 +1,7 @@
-document.getElementById('startBtn').addEventListener('click', async () => {
+const startBtn = document.getElementById('startBtn');
+const resetBtn = document.getElementById('resetBtn');
+
+startBtn.addEventListener('click', async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -19,13 +22,13 @@ document.getElementById('startBtn').addEventListener('click', async () => {
     let spikeCount = parseInt(localStorage.getItem("spikeCount") || "0");
     spikeCountText.textContent = spikeCount;
 
-    const SPIKE_THRESHOLD = 35; // Adjust sensitivity
+    const SPIKE_THRESHOLD = 35;
 
     function update() {
       analyser.getByteTimeDomainData(dataArray);
 
-      // Draw waveform
-      ctx.fillStyle = "#FDFFB6";
+      // Draw waveform with pastel line
+      ctx.fillStyle = "#CAFFBF";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.lineWidth = 2;
       ctx.strokeStyle = "#9BF6FF";
@@ -40,7 +43,6 @@ document.getElementById('startBtn').addEventListener('click', async () => {
         ctx.lineTo(x, y);
         x += sliceWidth;
 
-        // For RMS noise calculation
         const val = (dataArray[i] - 128) / 128;
         sum += val * val;
       }
@@ -50,7 +52,6 @@ document.getElementById('startBtn').addEventListener('click', async () => {
       const level = Math.min(100, Math.round(rms * 200));
       noiseLevelText.textContent = `${level}%`;
 
-      // Spike detection
       if (level > SPIKE_THRESHOLD) {
         spikeCount++;
         spikeCountText.textContent = spikeCount;
@@ -64,4 +65,9 @@ document.getElementById('startBtn').addEventListener('click', async () => {
     alert('Microphone access denied or unavailable.');
     console.error(err);
   }
+});
+
+resetBtn.addEventListener('click', () => {
+  localStorage.setItem("spikeCount", "0");
+  document.getElementById('spikeCount').textContent = "0";
 });
