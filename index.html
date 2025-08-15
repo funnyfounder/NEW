@@ -2,21 +2,26 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>NoiseRank Prototype</title>
+  <title>NoiseRank Dashboard</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding-top: 50px; background: #FFC6FF; }
-    #noiseLevel { font-size: 2em; margin-top: 20px; }
-    #meter { width: 300px; height: 30px; background: #eee; margin: 20px auto; border-radius: 15px; overflow: hidden; }
-    #meterFill { height: 100%; width: 0%; background: #9BF6FF; transition: width 0.1s linear; }
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #FFC6FF; }
+    h1 { margin-bottom: 5px; }
+    #stats { margin: 20px 0; font-size: 1.2em; }
+    canvas { background: #FDFFB6; border-radius: 8px; display: block; margin: 0 auto; }
     button { padding: 10px 20px; font-size: 1em; border: none; border-radius: 8px; background: #FFD6A5; cursor: pointer; }
   </style>
 </head>
 <body>
-  <h1>NoiseRank — Live Noise Meter</h1>
+  <h1>NoiseRank — Real-Time Dashboard</h1>
   <button id="startBtn">Start Listening</button>
-  <div id="noiseLevel">Noise Level: 0%</div>
-  <div id="meter"><div id="meterFill"></div></div>
+  
+  <div id="stats">
+    Noise Level: <span id="noiseLevel">0%</span> |
+    Distractions Today: <span id="spikeCount">0</span>
+  </div>
+  
+  <canvas id="waveform" width="800" height="200"></canvas>
 
-  <script src="noiseRank.js"></script>
+  <script src="noiserank-dashboard.js"></script>
 </body>
 </html>
