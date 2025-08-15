@@ -6,24 +6,56 @@ document.getElementById('startBtn').addEventListener('click', async () => {
     const source = audioContext.createMediaStreamSource(stream);
 
     source.connect(analyser);
-    analyser.fftSize = 512;
-    const dataArray = new Uint8Array(analyser.frequencyBinCount);
+    analyser.fftSize = 1024;
+    const bufferLength = analyser.fftSize;
+    const dataArray = new Uint8Array(bufferLength);
+
+    const canvas = document.getElementById('waveform');
+    const ctx = canvas.getContext('2d');
 
     const noiseLevelText = document.getElementById('noiseLevel');
-    const meterFill = document.getElementById('meterFill');
+    const spikeCountText = document.getElementById('spikeCount');
+
+    let spikeCount = parseInt(localStorage.getItem("spikeCount") || "0");
+    spikeCountText.textContent = spikeCount;
+
+    const SPIKE_THRESHOLD = 35; // Adjust sensitivity
 
     function update() {
       analyser.getByteTimeDomainData(dataArray);
+
+      // Draw waveform
+      ctx.fillStyle = "#FDFFB6";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#9BF6FF";
+      ctx.beginPath();
+
       let sum = 0;
-      for (let i = 0; i < dataArray.length; i++) {
-        const val = (dataArray[i] - 128) / 128; // Normalize between -1 and 1
+      const sliceWidth = canvas.width / bufferLength;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        const v = dataArray[i] / 128.0;
+        const y = v * canvas.height / 2;
+        ctx.lineTo(x, y);
+        x += sliceWidth;
+
+        // For RMS noise calculation
+        const val = (dataArray[i] - 128) / 128;
         sum += val * val;
       }
-      const rms = Math.sqrt(sum / dataArray.length);
-      const level = Math.min(100, Math.round(rms * 200)); // Scale to %
-      
-      noiseLevelText.textContent = `Noise Level: ${level}%`;
-      meterFill.style.width = level + "%";
+      ctx.stroke();
+
+      const rms = Math.sqrt(sum / bufferLength);
+      const level = Math.min(100, Math.round(rms * 200));
+      noiseLevelText.textContent = `${level}%`;
+
+      // Spike detection
+      if (level > SPIKE_THRESHOLD) {
+        spikeCount++;
+        spikeCountText.textContent = spikeCount;
+        localStorage.setItem("spikeCount", spikeCount);
+      }
 
       requestAnimationFrame(update);
     }
