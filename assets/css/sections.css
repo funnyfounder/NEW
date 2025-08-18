@@ -1,0 +1,7 @@
+/* Fine-tuning per section if needed later */
+.section.hero .actions .btn.primary{background:var(--elec)}
+.section.hero .actions .btn{background:var(--mauve)}
+
+.section.dashboard .panel.listen .bar-inner{background:linear-gradient(90deg,var(--elec),var(--mauve))}
+.section.listen-section .content{max-width:820px}
+.section.music .music-suggestions .music-card{background:var(--tea)}
