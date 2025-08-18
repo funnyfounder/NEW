@@ -1,0 +1,23 @@
+.btn{
+  appearance:none;border:none;cursor:pointer;
+  background:var(--cream);color:#000;padding:10px 14px;border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);transition:transform var(--dur-quick) var(--ease), box-shadow var(--dur-quick) var(--ease), background var(--dur-soft) var(--ease)
+}
+.btn.primary{background:var(--elec)}
+.btn[disabled]{opacity:.6;cursor:not-allowed}
+.btn:focus-visible{outline:2px solid #0002; outline-offset:2px}
+.btn:hover{transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,.12)}
+.btn:active{transform:translateY(0)}
+
+.music-suggestions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.music-card{
+  background:var(--tea); padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.06)
+}
+.music-card h3{margin:0 0 6px 0;font-size:1rem}
+.music-card a{color:#0b5b6a;text-decoration:none}
+.music-card a:hover{text-decoration:underline}
+
+.bullets{list-style:disc;max-width:760px;margin:0 auto;text-align:left}
+.bullets li{margin:6px 0}
+.steps{max-width:760px;margin:0 auto;text-align:left}
+.steps li{margin:6px 0}
