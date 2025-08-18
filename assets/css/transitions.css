@@ -1,0 +1,28 @@
+/* Enter fades and subtle slides */
+.fade{opacity:0;transform:translateY(10px);animation:fadeIn .7s var(--ease) .15s forwards}
+@keyframes fadeIn{to{opacity:1;transform:none}}
+
+/* Parallax background blobs (optional) */
+.blobs::before, .blobs::after{
+  content:"";position:absolute;border-radius:50%;filter:blur(30px);opacity:.45;
+  transform:translateY(calc(var(--parallax, 0px)));
+}
+.section[data-color="mauve"] .blobs::before{width:340px;height:340px;background:var(--mauve);left:8%;top:18%}
+.section[data-color="peri"] .blobs::before{width:300px;height:300px;background:var(--peri);left:12%;top:22%}
+.section[data-color="cream"] .blobs::before{width:320px;height:320px;background:var(--cream);left:10%;top:24%}
+.section[data-color="sunset"] .blobs::before{width:320px;height:320px;background:var(--sunset);left:10%;top:24%}
+.section[data-color="tea"] .blobs::before{width:320px;height:320px;background:var(--tea);left:10%;top:24%}
+.section[data-color="powder"] .blobs::before{width:320px;height:320px;background:var(--powder);left:10%;top:24%}
+.section[data-color="elec"] .blobs::before{width:320px;height:320px;background:var(--elec);left:10%;top:24%}
+
+/* Section color backgrounds (base fill; real background is blended on <body>) */
+.section[data-color="mauve"]{background:var(--mauve)}
+.section[data-color="peri"]{background:var(--peri)}
+.section[data-color="cream"]{background:var(--cream)}
+.section[data-color="sunset"]{background:var(--sunset)}
+.section[data-color="tea"]{background:var(--tea)}
+.section[data-color="powder"]{background:var(--powder)}
+.section[data-color="elec"]{background:var(--elec)}
+
+/* Text contrast helpers */
+.section h1, .section h2, .section p, .section li, .section label { color:#111; text-shadow:0 1px 0 #ffffff88; }
