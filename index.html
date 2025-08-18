@@ -9,7 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/transitions.css">
   <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/sections.css">
 </head>
 <body>
   <div class="gradient-overlay" aria-hidden="true"></div>
@@ -19,59 +21,132 @@
     <div class="tagline">Real-Time Distraction Tracker • <span class="soft">Echoing Sophistications One Note At A Time</span></div>
   </header>
 
-  <main class="layout">
-    <section class="panel listen" aria-labelledby="listen-title">
-      <div class="panel-inner">
-        <h1 id="listen-title">Start Listening</h1>
-        <p class="muted">We never store or send your audio — everything stays on your device.</p>
-
-        <div class="controls">
-          <button id="btnStart" class="btn primary">Start Listening</button>
-          <button id="btnStop" class="btn" disabled>Stop</button>
-        </div>
-
-        <div class="status">
-          <div class="chip" id="permStatus" aria-live="polite">Mic: idle</div>
-          <div class="chip" id="privacyNote">Privacy: Local processing only</div>
-        </div>
-
-        <div class="meters">
-          <div class="meter">
-            <label>Current Noise Level</label>
-            <div class="bar-outer" aria-label="Current noise level">
-              <div class="bar-inner" id="levelBar" style="width:0%"></div>
-            </div>
-            <div class="meter-readings">
-              <span id="rmsText">RMS: 0%</span>
-              <span id="scoreText">Distraction Score: 0</span>
-              <span id="spikesText">Spikes/min: 0</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="canvas-wrap">
-          <canvas id="waveCanvas" width="1200" height="300" aria-label="Waveform visualization"></canvas>
-        </div>
-
-        <div class="tips">
-          <p class="muted small">Tip: On iOS Safari, press “Start Listening” to grant microphone access. Audio never leaves your device.</p>
+  <main id="scroll" class="main">
+    <!-- HERO -->
+    <section class="section hero" data-color="mauve" aria-labelledby="hero-title">
+      <div class="content fade">
+        <h1 id="hero-title">Real-Time Distraction Tracker</h1>
+        <p class="lead">Understand your space, protect your focus. Audio never leaves your device.</p>
+        <div class="actions">
+          <a href="#listen" class="btn primary">Start Tracking</a>
+          <a href="#how" class="btn">How it works</a>
         </div>
       </div>
+      <div class="blobs" aria-hidden="true"></div>
     </section>
 
-    <section class="panel music" aria-labelledby="music-title">
-      <div class="panel-inner">
-        <h2 id="music-title">Calm Music Suggestions</h2>
-        <p class="muted">Matched to your current environment.</p>
-        <div class="music-suggestions" id="musicList">
-          <!-- populated by JS -->
+    <!-- DASHBOARD (LIVE) -->
+    <section class="section dashboard" data-color="peri" aria-labelledby="dash-title" id="dashboard">
+      <div class="content fade">
+        <h2 id="dash-title">Noise Tracking Dashboard</h2>
+        <p class="muted">Live noise level, distraction score, and waveform.</p>
+
+        <div class="panel listen" id="listen">
+          <div class="panel-inner">
+            <div class="controls">
+              <button id="btnStart" class="btn primary">Start Listening</button>
+              <button id="btnStop" class="btn" disabled>Stop</button>
+            </div>
+
+            <div class="status">
+              <div class="chip" id="permStatus" aria-live="polite">Mic: idle</div>
+              <div class="chip">Privacy: Local processing only</div>
+            </div>
+
+            <div class="meters">
+              <div class="meter">
+                <label>Current Noise Level</label>
+                <div class="bar-outer" aria-label="Current noise level">
+                  <div class="bar-inner" id="levelBar" style="width:0%"></div>
+                </div>
+                <div class="meter-readings">
+                  <span id="rmsText">RMS: 0%</span>
+                  <span id="scoreText">Distraction Score: 0</span>
+                  <span id="spikesText">Spikes/min: 0</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="canvas-wrap">
+              <canvas id="waveCanvas" width="1200" height="300" aria-label="Waveform visualization"></canvas>
+            </div>
+
+            <p class="muted small">Tip: On iOS, grant mic permission by tapping Start. Audio is never recorded or sent.</p>
+          </div>
         </div>
       </div>
+      <div class="blobs" aria-hidden="true"></div>
+    </section>
+
+    <!-- HISTORY (placeholder for Phase 3) -->
+    <section class="section history" data-color="cream" aria-labelledby="hist-title">
+      <div class="content fade">
+        <h2 id="hist-title">Noise Profile & History</h2>
+        <p class="muted">Weekly graphs coming next. Data stays on-device (IndexedDB).</p>
+      </div>
+      <div class="blobs" aria-hidden="true"></div>
+    </section>
+
+    <!-- LISTENING / RECORDING CONTROL -->
+    <section class="section listen-section" data-color="sunset" aria-labelledby="listen-title2">
+      <div class="content fade">
+        <h2 id="listen-title2">Listening & Privacy</h2>
+        <ul class="bullets">
+          <li>No audio leaves your device.</li>
+          <li>We compute RMS and spikes in real time.</li>
+          <li>“Distraction Score” reflects spikes and overall level.</li>
+        </ul>
+      </div>
+      <div class="blobs" aria-hidden="true"></div>
+    </section>
+
+    <!-- CALM MUSIC -->
+    <section class="section music" data-color="tea" aria-labelledby="music-title">
+      <div class="content fade">
+        <h2 id="music-title">Calm Music Suggestions</h2>
+        <p class="muted">Matched to your current environment.</p>
+        <div class="music-suggestions" id="musicList"></div>
+      </div>
+      <div class="blobs" aria-hidden="true"></div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section how" data-color="powder" id="how" aria-labelledby="how-title">
+      <div class="content fade">
+        <h2 id="how-title">How It Works</h2>
+        <ol class="steps">
+          <li>Request microphone permission.</li>
+          <li>Process audio locally using Web Audio API.</li>
+          <li>Calculate RMS and detect spikes as “distraction events”.</li>
+          <li>Visualize a waveform and adjust the background mood.</li>
+        </ol>
+      </div>
+      <div class="blobs" aria-hidden="true"></div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section class="section privacy" data-color="powder" aria-labelledby="privacy-title">
+      <div class="content fade">
+        <h2 id="privacy-title">Privacy & Data</h2>
+        <p class="muted">No recordings. Only derived metrics (RMS, spikes, summaries) are stored locally.</p>
+      </div>
+      <div class="blobs" aria-hidden="true"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" data-color="elec" aria-labelledby="contact-title">
+      <div class="content fade">
+        <h2 id="contact-title">Contact & Feedback</h2>
+        <p class="muted">Feature requests and bug reports welcome.</p>
+      </div>
+      <div class="blobs" aria-hidden="true"></div>
     </section>
   </main>
 
   <footer class="foot">
-    <div class="privacy-banner">We never store or send your audio — processing happens on your device only.</div>
+    <div class="privacy-banner" role="status" aria-live="polite">
+      We never store or send your audio — processing happens on your device only.
+    </div>
   </footer>
 
   <script type="module" src="assets/js/app.js"></script>
