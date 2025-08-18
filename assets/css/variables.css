@@ -1,0 +1,27 @@
+:root{
+  --melon:#ffadad;      /* accents */
+  --sunset:#ffd6a5;     /* listening */
+  --cream:#fdffb6;      /* history */
+  --tea:#caffbf;        /* music */
+  --elec:#9bf6ff;       /* progress/contact */
+  --jordy:#a0c4ff;
+  --peri:#bdb2ff;       /* dashboard */
+  --mauve:#ffc6ff;      /* hero/testimonials */
+  --powder:#fffffc;     /* how/privacy */
+
+  --text:#111;
+  --muted:#333;
+
+  --radius:16px;
+  --shadow:0 10px 28px rgba(0,0,0,.08);
+  --ease:cubic-bezier(.25,.1,.25,1);
+  --dur-quick:180ms;
+  --dur-soft:420ms;
+  --dur-smooth:1000ms;
+
+  --noise-opacity:.045;
+
+  /* dynamic background endpoints (updated by JS) */
+  --bg-a: var(--mauve);
+  --bg-b: var(--peri);
+}
