@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>NoiseRank — Real-Time Distraction Tracker</title>
+  <meta name="description" content="NoiseRank: Real-Time Distraction Tracker. Echoing Sophistications One Note At A Time. Privacy-first: audio never leaves your device."/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <div class="gradient-overlay" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">NoiseRank</div>
+    <div class="tagline">Real-Time Distraction Tracker • <span class="soft">Echoing Sophistications One Note At A Time</span></div>
+  </header>
+
+  <main class="layout">
+    <section class="panel listen" aria-labelledby="listen-title">
+      <div class="panel-inner">
+        <h1 id="listen-title">Start Listening</h1>
+        <p class="muted">We never store or send your audio — everything stays on your device.</p>
+
+        <div class="controls">
+          <button id="btnStart" class="btn primary">Start Listening</button>
+          <button id="btnStop" class="btn" disabled>Stop</button>
+        </div>
+
+        <div class="status">
+          <div class="chip" id="permStatus" aria-live="polite">Mic: idle</div>
+          <div class="chip" id="privacyNote">Privacy: Local processing only</div>
+        </div>
+
+        <div class="meters">
+          <div class="meter">
+            <label>Current Noise Level</label>
+            <div class="bar-outer" aria-label="Current noise level">
+              <div class="bar-inner" id="levelBar" style="width:0%"></div>
+            </div>
+            <div class="meter-readings">
+              <span id="rmsText">RMS: 0%</span>
+              <span id="scoreText">Distraction Score: 0</span>
+              <span id="spikesText">Spikes/min: 0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="waveCanvas" width="1200" height="300" aria-label="Waveform visualization"></canvas>
+        </div>
+
+        <div class="tips">
+          <p class="muted small">Tip: On iOS Safari, press “Start Listening” to grant microphone access. Audio never leaves your device.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel music" aria-labelledby="music-title">
+      <div class="panel-inner">
+        <h2 id="music-title">Calm Music Suggestions</h2>
+        <p class="muted">Matched to your current environment.</p>
+        <div class="music-suggestions" id="musicList">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="privacy-banner">We never store or send your audio — processing happens on your device only.</div>
+  </footer>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
